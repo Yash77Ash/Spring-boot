@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           background-color: #444;
+           padding: 0px ;
+        }
+        nav a {
+            color: #fff;
+            padding: 14px 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #575757;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .main-content {
+            background: #fff;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .profile-btn {
+            cursor: pointer;
+            color: white;
+            padding: 14px 20px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .sidebar.show {
+            transform: translateX(0);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar p {
+            font-size: 1.2em;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        h2 {
+            color: #4CAF50;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        .user-name {
+            font-weight: bold;
+            color: #2196F3;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-btn:hover {
+            background-color: #575757;
+        }
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                display: block;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Career Opportunities</h1>
+</header>
+<nav>
+    <div>
+        <a href="/">Home</a>
+        <a href="/career">Career</a>
+        <a href="/about">About Us</a>
+        <span th:if="${#request.remoteUser != null}" class="profile-btn" onclick="toggleSidebar()">Profile</span>
+    </div>
+
+    <a th:if="${#request.remoteUser == null}" href="/login">Login</a>
+    <a th:if="${#request.remoteUser != null}" href="/logout" class="logout-btn">Logout</a>
+</nav>
+
+<div class="sidebar" id="profileSidebar">
+    <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+    <h3>Profile Details</h3>
+    <p><strong>Username:</strong> <span th:text="${#httpServletRequest.remoteUser}">Username</span></p>
+    <p><strong>Password:</strong> <span>******</span></p>
+</div>
+
+<div class="container">
+    <div class="main-content">
+        <h2>Career Opportunities</h2>
+        <p>Explore exciting career opportunities with us. Join our team and be part of a dynamic and innovative company.</p>
+    </div>
+</div>
+<footer>
+
+</footer>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('profileSidebar');
+        sidebar.classList.toggle('show');
+    }
+</script>
+</body>
+</html>
